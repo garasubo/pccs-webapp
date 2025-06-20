@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCCS学習アプリ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>PCCS学習アプリ</h1>
+            <div class="score-board">
+                <span>正解: <span id="correct-count">0</span></span>
+                <span>不正解: <span id="incorrect-count">0</span></span>
+                <span>正答率: <span id="accuracy">0%</span></span>
+            </div>
+        </header>
+
+        <main>
+            <div class="color-display">
+                <div id="color-swatch" class="color-swatch"></div>
+                <div class="color-info">
+                    <p id="color-description">色を表示中...</p>
+                </div>
+            </div>
+
+            <div class="answer-section">
+                <div class="tone-selection">
+                    <h3>トーンを選択してください：</h3>
+                    <div class="tone-buttons">
+                        <button class="tone-btn" data-tone="v">Vivid (v)</button>
+                        <button class="tone-btn" data-tone="b">Bright (b)</button>
+                        <button class="tone-btn" data-tone="s">Strong (s)</button>
+                        <button class="tone-btn" data-tone="dp">Deep (dp)</button>
+                        <button class="tone-btn" data-tone="lt">Light (lt)</button>
+                        <button class="tone-btn" data-tone="sf">Soft (sf)</button>
+                        <button class="tone-btn" data-tone="d">Dull (d)</button>
+                        <button class="tone-btn" data-tone="dk">Dark (dk)</button>
+                        <button class="tone-btn" data-tone="p">Pale (p)</button>
+                        <button class="tone-btn" data-tone="ltg">Light grayish (ltg)</button>
+                        <button class="tone-btn" data-tone="g">Grayish (g)</button>
+                        <button class="tone-btn" data-tone="dkg">Dark grayish (dkg)</button>
+                    </div>
+                </div>
+
+                <div class="hue-selection">
+                    <h3>色相番号を選択してください：</h3>
+                    <div id="hue-buttons" class="hue-buttons">
+                        <!-- 動的に生成される -->
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="submit-answer" class="submit-btn" disabled>回答する</button>
+                    <button id="next-question" class="next-btn" style="display: none;">次の問題</button>
+                    <button id="show-answer" class="hint-btn">答えを見る</button>
+                </div>
+            </div>
+
+            <div id="feedback" class="feedback" style="display: none;">
+                <div class="feedback-content">
+                    <h3 id="feedback-title"></h3>
+                    <p id="feedback-message"></p>
+                    <div id="correct-answer" class="correct-answer"></div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="reference-panel">
+            <h3>PCCS参考資料</h3>
+            <div class="reference-content">
+                <h4>12のトーン</h4>
+                <ul class="tone-list">
+                    <li><strong>Vivid (v)</strong>: 鮮やかな色</li>
+                    <li><strong>Bright (b)</strong>: 明るい色</li>
+                    <li><strong>Strong (s)</strong>: 強い色</li>
+                    <li><strong>Deep (dp)</strong>: 深い色</li>
+                    <li><strong>Light (lt)</strong>: 薄い色</li>
+                    <li><strong>Soft (sf)</strong>: やわらかい色</li>
+                    <li><strong>Dull (d)</strong>: くすんだ色</li>
+                    <li><strong>Dark (dk)</strong>: 暗い色</li>
+                    <li><strong>Pale (p)</strong>: うすい色</li>
+                    <li><strong>Light grayish (ltg)</strong>: 明るい灰みの色</li>
+                    <li><strong>Grayish (g)</strong>: 灰みの色</li>
+                    <li><strong>Dark grayish (dkg)</strong>: 暗い灰みの色</li>
+                </ul>
+                <h4>色相番号</h4>
+                <p><strong>Vivid:</strong> 1-24 (24色相)</p>
+                <p><strong>その他:</strong> 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24 (12色相)</p>
+            </div>
+        </aside>
+    </div>
+
+    <script src="pccs-data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
