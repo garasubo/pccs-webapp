@@ -428,6 +428,234 @@ h1 {
   color: #555;
 }
 
+/* Color Relationship Game Styles */
+.color-relationship-game {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.color-relationship-game .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #ecf0f1;
+}
+
+.color-relationship-game .header h2 {
+  color: #2c3e50;
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.color-relationship-game .score {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #34495e;
+  background: #ecf0f1;
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+
+.question-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.question-section p {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.color-pair {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin: 30px 0;
+}
+
+.color-sample {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.color-box {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border: 3px solid #fff;
+  transition: transform 0.3s ease;
+}
+
+.color-box:hover {
+  transform: scale(1.1);
+}
+
+.color-info {
+  text-align: center;
+}
+
+.color-info p {
+  margin: 5px 0;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.vs-divider {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #e74c3c;
+  background: #fdeaea;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 2px solid #e74c3c;
+}
+
+.relationship-selection {
+  margin: 40px 0;
+}
+
+.relationship-selection h3 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+}
+
+.relationship-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.relationship-button {
+  padding: 20px;
+  border: 2px solid #bdc3c7;
+  background: white;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.relationship-button:hover {
+  border-color: #3498db;
+  background: #ebf3fd;
+  transform: translateY(-2px);
+}
+
+.relationship-button.selected {
+  background: #3498db;
+  color: white;
+  border-color: #3498db;
+}
+
+.relationship-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.relationship-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.relationship-desc {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.submit-button,
+.next-button {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.submit-button {
+  background: #27ae60;
+  color: white;
+}
+
+.submit-button:hover:not(:disabled) {
+  background: #229954;
+  transform: translateY(-2px);
+}
+
+.submit-button:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.next-button {
+  background: #3498db;
+  color: white;
+}
+
+.next-button:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+
+.feedback {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 20px;
+  border-left: 5px solid #3498db;
+  margin-top: 20px;
+}
+
+.feedback.correct {
+  border-left-color: #27ae60;
+  background: #d5f4e6;
+}
+
+.feedback.incorrect {
+  border-left-color: #e74c3c;
+  background: #fdeaea;
+}
+
+.feedback-content h3 {
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.feedback.correct h3 {
+  color: #27ae60;
+}
+
+.feedback.incorrect h3 {
+  color: #e74c3c;
+}
+
+.feedback-content p {
+  margin: 8px 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
 /* レスポンシブデザイン */
 @media (max-width: 768px) {
   .container {
@@ -479,6 +707,26 @@ h1 {
   .color-comparison-swatch {
     width: 60px;
     height: 45px;
+  }
+
+  /* Color Relationship Game responsive */
+  .color-pair {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .relationship-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .color-box {
+    width: 100px;
+    height: 100px;
+  }
+
+  .nav-button {
+    margin-right: 10px;
+    margin-bottom: 10px;
   }
 }
 

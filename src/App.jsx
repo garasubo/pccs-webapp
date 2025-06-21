@@ -9,6 +9,7 @@ import ActionButtons from './components/ActionButtons';
 import Feedback from './components/Feedback';
 import ReferencePanel from './components/ReferencePanel';
 import ColorCircle from './components/ColorCircle';
+import ColorRelationship from './components/ColorRelationship';
 import './App.css';
 
 function App() {
@@ -104,6 +105,19 @@ function App() {
     );
   }
 
+  if (currentView === 'relationship') {
+    return (
+      <div className="container">
+        <div className="navigation">
+          <button onClick={() => setCurrentView('game')} className="nav-button">
+            ← Back to Game
+          </button>
+        </div>
+        <ColorRelationship />
+      </div>
+    );
+  }
+
   return (
     <div className="container">
       <Header score={score} accuracy={getAccuracy()} />
@@ -111,6 +125,9 @@ function App() {
       <div className="navigation">
         <button onClick={() => setCurrentView('circle')} className="nav-button">
           View Color Circle
+        </button>
+        <button onClick={() => setCurrentView('relationship')} className="nav-button">
+          Color Relationship Game
         </button>
       </div>
       
