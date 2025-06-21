@@ -2,6 +2,7 @@
 
 PCCS（Practical Color Coordinate System）を学習するためのインタラクティブなウェブアプリケーションです。色を見て、そのトーンと色相番号を答える練習ができます。
 
+RGB値は以下のURLから取得しています： http://garakuta-net.sakura.ne.jp/color/pccs/matrix.html
 
 ## 🎨 特徴
 

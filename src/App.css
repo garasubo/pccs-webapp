@@ -40,6 +40,93 @@ h1 {
   font-weight: 600;
 }
 
+/* Navigation */
+.navigation {
+  grid-column: 1 / -1;
+  margin-bottom: 10px;
+}
+
+.nav-button {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+  background: #2980b9;
+}
+
+/* Color Circle Styles */
+.color-circle-container {
+  grid-column: 1 / -1;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.color-circle-container h1 {
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.tone-selector {
+  margin-bottom: 30px;
+}
+
+.tone-selector label {
+  font-weight: 600;
+  margin-right: 10px;
+  color: #34495e;
+}
+
+.tone-selector select {
+  padding: 8px 12px;
+  border: 2px solid #bdc3c7;
+  border-radius: 6px;
+  font-size: 16px;
+  background: white;
+  cursor: pointer;
+}
+
+.circle-display {
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.color-circle-svg {
+  background: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.color-info {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #ecf0f1;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.color-info h3 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.color-info p {
+  margin-bottom: 8px;
+  color: #34495e;
+  line-height: 1.5;
+}
+
 .score-board {
   display: flex;
   gap: 20px;

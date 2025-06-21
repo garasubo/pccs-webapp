@@ -8,9 +8,11 @@ import HueSelection from './components/HueSelection';
 import ActionButtons from './components/ActionButtons';
 import Feedback from './components/Feedback';
 import ReferencePanel from './components/ReferencePanel';
+import ColorCircle from './components/ColorCircle';
 import './App.css';
 
 function App() {
+  const [currentView, setCurrentView] = useState('game');
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [selectedTone, setSelectedTone] = useState(null);
   const [selectedHue, setSelectedHue] = useState(null);
@@ -44,7 +46,7 @@ function App() {
   };
 
   // Handle answer submission
-  const handleSubmit = () => {
+  const handleSubmit = useCallback(() => {
     if (!selectedTone || !selectedHue || !currentQuestion) return;
 
     const isCorrect = (
@@ -60,7 +62,7 @@ function App() {
         hue: selectedHue
       }
     });
-  };
+  }, [selectedTone, selectedHue, currentQuestion, updateScore]);
 
   // Handle show answer (hint)
   const handleShowAnswer = () => {
@@ -70,9 +72,9 @@ function App() {
   };
 
   // Handle next question
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     generateNewQuestion();
-  };
+  }, [generateNewQuestion]);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -87,11 +89,30 @@ function App() {
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [selectedTone, selectedHue, feedback]);
+  }, [selectedTone, selectedHue, feedback, handleSubmit, handleNext]);
+
+  if (currentView === 'circle') {
+    return (
+      <div className="container">
+        <div className="navigation">
+          <button onClick={() => setCurrentView('game')} className="nav-button">
+            ← Back to Game
+          </button>
+        </div>
+        <ColorCircle />
+      </div>
+    );
+  }
 
   return (
     <div className="container">
       <Header score={score} accuracy={getAccuracy()} />
+      
+      <div className="navigation">
+        <button onClick={() => setCurrentView('circle')} className="nav-button">
+          View Color Circle
+        </button>
+      </div>
       
       <main className="main-content">
         <ColorDisplay currentQuestion={currentQuestion} />
