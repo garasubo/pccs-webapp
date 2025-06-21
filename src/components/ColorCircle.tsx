@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import { PCCS_DATA } from '../data/pccsData';
+import { PCCS_DATA, ToneKey } from '../data/pccsData';
 
-function ColorCircle() {
-  const [selectedTone, setSelectedTone] = useState('v');
+interface ColorInfo {
+  hue: number;
+  rgb: [number, number, number];
+  name: string;
+}
 
-  const getToneColors = (tone) => {
+const ColorCircle: React.FC = () => {
+  const [selectedTone, setSelectedTone] = useState<ToneKey>('v');
+
+  const getToneColors = (tone: ToneKey): ColorInfo[] => {
     const colors = PCCS_DATA.colors[tone];
     if (!colors) return [];
 
@@ -20,7 +26,7 @@ function ColorCircle() {
     }));
   };
 
-  const renderColorCircle = () => {
+  const renderColorCircle = (): JSX.Element => {
     const colors = getToneColors(selectedTone);
     const radius = 150;
     const textRadius = 180;
@@ -93,6 +99,10 @@ function ColorCircle() {
     );
   };
 
+  const handleToneChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+    setSelectedTone(e.target.value as ToneKey);
+  };
+
   return (
     <div className="color-circle-container">
       <h1>PCCS Color Circle</h1>
@@ -102,7 +112,7 @@ function ColorCircle() {
         <select 
           id="tone-select"
           value={selectedTone} 
-          onChange={(e) => setSelectedTone(e.target.value)}
+          onChange={handleToneChange}
         >
           {Object.entries(PCCS_DATA.tones).map(([key, tone]) => (
             <option key={key} value={key}>

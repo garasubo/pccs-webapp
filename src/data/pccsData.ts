@@ -1,7 +1,37 @@
 // PCCS色彩データベース
 // 各トーンと色相の組み合わせに対応するRGB値を定義
 
-export const PCCS_DATA = {
+export type ToneKey = 'v' | 'b' | 's' | 'dp' | 'lt' | 'sf' | 'd' | 'dk' | 'p' | 'ltg' | 'g' | 'dkg';
+
+export interface ToneInfo {
+  name: string;
+  description: string;
+  hues: number;
+}
+
+export type RGB = [number, number, number];
+
+export interface ColorResult {
+  tone: ToneKey;
+  hue: number;
+  rgb: RGB;
+  toneName: string;
+  toneDescription: string;
+  hueName: string;
+}
+
+export interface PCCSData {
+  tones: Record<ToneKey, ToneInfo>;
+  hueNames: Record<number, string>;
+  twelveHues: number[];
+  colors: Record<ToneKey, Record<number, RGB>>;
+  getColor: (tone: ToneKey, hue: number) => RGB | null;
+  rgbToCSS: (rgb: RGB) => string;
+  getAvailableHues: (tone: ToneKey) => number[];
+  getRandomColor: () => ColorResult;
+}
+
+export const PCCS_DATA: PCCSData = {
     // トーン定義
     tones: {
         'v': { name: 'Vivid', description: '鮮やかな色', hues: 24 },
@@ -237,7 +267,7 @@ export const PCCS_DATA = {
     },
 
     // 指定されたトーンと色相の色を取得
-    getColor: function(tone, hue) {
+    getColor: function(tone: ToneKey, hue: number): RGB | null {
         if (this.colors[tone] && this.colors[tone][hue]) {
             return this.colors[tone][hue];
         }
@@ -245,12 +275,12 @@ export const PCCS_DATA = {
     },
 
     // RGB値をCSS形式に変換
-    rgbToCSS: function(rgb) {
+    rgbToCSS: function(rgb: RGB): string {
         return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
     },
 
     // 指定されたトーンで利用可能な色相番号を取得
-    getAvailableHues: function(tone) {
+    getAvailableHues: function(tone: ToneKey): number[] {
         if (tone === 'v') {
             return Array.from({length: 24}, (_, i) => i + 1);
         } else {
@@ -259,8 +289,8 @@ export const PCCS_DATA = {
     },
 
     // ランダムな色を生成
-    getRandomColor: function() {
-        const tones = Object.keys(this.tones);
+    getRandomColor: function(): ColorResult {
+        const tones = Object.keys(this.tones) as ToneKey[];
         const randomTone = tones[Math.floor(Math.random() * tones.length)];
         const availableHues = this.getAvailableHues(randomTone);
         const randomHue = availableHues[Math.floor(Math.random() * availableHues.length)];
@@ -268,7 +298,7 @@ export const PCCS_DATA = {
         return {
             tone: randomTone,
             hue: randomHue,
-            rgb: this.getColor(randomTone, randomHue),
+            rgb: this.getColor(randomTone, randomHue)!,
             toneName: this.tones[randomTone].name,
             toneDescription: this.tones[randomTone].description,
             hueName: this.hueNames[randomHue] || `色相${randomHue}`

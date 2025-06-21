@@ -1,7 +1,11 @@
 import React from 'react';
-import { PCCS_DATA } from '../data/pccsData';
+import { PCCS_DATA, ColorResult } from '../data/pccsData';
 
-const ColorDisplay = ({ currentQuestion }) => {
+interface ColorDisplayProps {
+  currentQuestion: ColorResult | null;
+}
+
+const ColorDisplay: React.FC<ColorDisplayProps> = ({ currentQuestion }) => {
   if (!currentQuestion) {
     return (
       <div className="color-display">

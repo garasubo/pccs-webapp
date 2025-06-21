@@ -1,6 +1,12 @@
 import React from 'react';
+import { Score } from '../hooks/useScore';
 
-const Header = ({ score, accuracy }) => {
+interface HeaderProps {
+  score: Score;
+  accuracy: number;
+}
+
+const Header: React.FC<HeaderProps> = ({ score, accuracy }) => {
   return (
     <header className="header">
       <h1>PCCS学習アプリ</h1>

@@ -1,7 +1,13 @@
 import React from 'react';
-import { PCCS_DATA } from '../data/pccsData';
+import { PCCS_DATA, ToneKey } from '../data/pccsData';
 
-const HueSelection = ({ selectedTone, selectedHue, onHueSelect }) => {
+interface HueSelectionProps {
+  selectedTone: ToneKey | null;
+  selectedHue: number | null;
+  onHueSelect: (hue: number) => void;
+}
+
+const HueSelection: React.FC<HueSelectionProps> = ({ selectedTone, selectedHue, onHueSelect }) => {
   if (!selectedTone) {
     return (
       <div className="hue-selection">

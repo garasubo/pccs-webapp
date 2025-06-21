@@ -1,6 +1,16 @@
 import React from 'react';
+import { ToneKey } from '../data/pccsData';
 
-const ActionButtons = ({ 
+interface ActionButtonsProps {
+  selectedTone: ToneKey | null;
+  selectedHue: number | null;
+  showFeedback: boolean;
+  onSubmit: () => void;
+  onNext: () => void;
+  onShowAnswer: () => void;
+}
+
+const ActionButtons: React.FC<ActionButtonsProps> = ({ 
   selectedTone, 
   selectedHue, 
   showFeedback, 

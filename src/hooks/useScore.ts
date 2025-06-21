@@ -1,7 +1,20 @@
 import { useState, useEffect } from 'react';
 
-export const useScore = () => {
-  const [score, setScore] = useState({
+export interface Score {
+  correct: number;
+  incorrect: number;
+  total: number;
+}
+
+export interface UseScoreReturn {
+  score: Score;
+  updateScore: (isCorrect: boolean) => void;
+  resetScore: () => void;
+  getAccuracy: () => number;
+}
+
+export const useScore = (): UseScoreReturn => {
+  const [score, setScore] = useState<Score>({
     correct: 0,
     incorrect: 0,
     total: 0
@@ -20,7 +33,7 @@ export const useScore = () => {
     localStorage.setItem('pccs-study-score', JSON.stringify(score));
   }, [score]);
 
-  const updateScore = (isCorrect) => {
+  const updateScore = (isCorrect: boolean): void => {
     setScore(prevScore => ({
       correct: prevScore.correct + (isCorrect ? 1 : 0),
       incorrect: prevScore.incorrect + (isCorrect ? 0 : 1),
@@ -28,7 +41,7 @@ export const useScore = () => {
     }));
   };
 
-  const resetScore = () => {
+  const resetScore = (): void => {
     setScore({
       correct: 0,
       incorrect: 0,
@@ -36,7 +49,7 @@ export const useScore = () => {
     });
   };
 
-  const getAccuracy = () => {
+  const getAccuracy = (): number => {
     return score.total > 0 ? Math.round((score.correct / score.total) * 100) : 0;
   };
 

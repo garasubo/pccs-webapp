@@ -1,8 +1,13 @@
 import React from 'react';
-import { PCCS_DATA } from '../data/pccsData';
+import { PCCS_DATA, ToneKey } from '../data/pccsData';
 
-const ToneSelection = ({ selectedTone, onToneSelect }) => {
-  const tones = Object.entries(PCCS_DATA.tones);
+interface ToneSelectionProps {
+  selectedTone: ToneKey | null;
+  onToneSelect: (tone: ToneKey) => void;
+}
+
+const ToneSelection: React.FC<ToneSelectionProps> = ({ selectedTone, onToneSelect }) => {
+  const tones = Object.entries(PCCS_DATA.tones) as [ToneKey, typeof PCCS_DATA.tones[ToneKey]][];
 
   return (
     <div className="tone-selection">

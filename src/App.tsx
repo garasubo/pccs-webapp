@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { PCCS_DATA } from './data/pccsData';
-import { useScore } from './hooks/useScore';
+import { PCCS_DATA, ColorResult, ToneKey } from './data/pccsData';
+import { useScore, Score } from './hooks/useScore';
 import Header from './components/Header';
 import ColorDisplay from './components/ColorDisplay';
 import ToneSelection from './components/ToneSelection';
@@ -12,22 +12,32 @@ import ColorCircle from './components/ColorCircle';
 import ColorRelationship from './components/ColorRelationship';
 import './App.css';
 
-function App() {
-  const [currentView, setCurrentView] = useState('game');
-  const [currentQuestion, setCurrentQuestion] = useState(null);
-  const [selectedTone, setSelectedTone] = useState(null);
-  const [selectedHue, setSelectedHue] = useState(null);
-  const [feedback, setFeedback] = useState(null);
+export type ViewType = 'game' | 'circle' | 'relationship';
+
+export interface FeedbackData {
+  type: 'correct' | 'incorrect' | 'hint';
+  userSelection?: {
+    tone: ToneKey;
+    hue: number;
+  };
+}
+
+function App(): JSX.Element {
+  const [currentView, setCurrentView] = useState<ViewType>('game');
+  const [currentQuestion, setCurrentQuestion] = useState<ColorResult | null>(null);
+  const [selectedTone, setSelectedTone] = useState<ToneKey | null>(null);
+  const [selectedHue, setSelectedHue] = useState<number | null>(null);
+  const [feedback, setFeedback] = useState<FeedbackData | null>(null);
   const { score, updateScore, getAccuracy } = useScore();
 
   // Generate new question
-  const generateNewQuestion = useCallback(() => {
+  const generateNewQuestion = useCallback((): void => {
     const newQuestion = PCCS_DATA.getRandomColor();
     setCurrentQuestion(newQuestion);
     setSelectedTone(null);
     setSelectedHue(null);
     setFeedback(null);
-    console.log('新しい問題:', newQuestion); // デバッグ用
+    console.log('新しい問題:', newQuestion);
   }, []);
 
   // Initialize with first question
@@ -36,18 +46,18 @@ function App() {
   }, [generateNewQuestion]);
 
   // Handle tone selection
-  const handleToneSelect = (tone) => {
+  const handleToneSelect = (tone: ToneKey): void => {
     setSelectedTone(tone);
     setSelectedHue(null); // Reset hue selection when tone changes
   };
 
   // Handle hue selection
-  const handleHueSelect = (hue) => {
+  const handleHueSelect = (hue: number): void => {
     setSelectedHue(hue);
   };
 
   // Handle answer submission
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = useCallback((): void => {
     if (!selectedTone || !selectedHue || !currentQuestion) return;
 
     const isCorrect = (
@@ -66,20 +76,20 @@ function App() {
   }, [selectedTone, selectedHue, currentQuestion, updateScore]);
 
   // Handle show answer (hint)
-  const handleShowAnswer = () => {
+  const handleShowAnswer = (): void => {
     setFeedback({
       type: 'hint'
     });
   };
 
   // Handle next question
-  const handleNext = useCallback(() => {
+  const handleNext = useCallback((): void => {
     generateNewQuestion();
   }, [generateNewQuestion]);
 
   // Keyboard shortcuts
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent): void => {
       if (e.key === 'Enter' && selectedTone && selectedHue && !feedback) {
         handleSubmit();
       } else if (e.key === ' ' && feedback) {
@@ -92,11 +102,15 @@ function App() {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [selectedTone, selectedHue, feedback, handleSubmit, handleNext]);
 
+  const handleViewChange = (view: ViewType): void => {
+    setCurrentView(view);
+  };
+
   if (currentView === 'circle') {
     return (
       <div className="container">
         <div className="navigation">
-          <button onClick={() => setCurrentView('game')} className="nav-button">
+          <button onClick={() => handleViewChange('game')} className="nav-button">
             ← Back to Game
           </button>
         </div>
@@ -109,7 +123,7 @@ function App() {
     return (
       <div className="container">
         <div className="navigation">
-          <button onClick={() => setCurrentView('game')} className="nav-button">
+          <button onClick={() => handleViewChange('game')} className="nav-button">
             ← Back to Game
           </button>
         </div>
@@ -123,10 +137,10 @@ function App() {
       <Header score={score} accuracy={getAccuracy()} />
       
       <div className="navigation">
-        <button onClick={() => setCurrentView('circle')} className="nav-button">
+        <button onClick={() => handleViewChange('circle')} className="nav-button">
           View Color Circle
         </button>
-        <button onClick={() => setCurrentView('relationship')} className="nav-button">
+        <button onClick={() => handleViewChange('relationship')} className="nav-button">
           Color Relationship Game
         </button>
       </div>

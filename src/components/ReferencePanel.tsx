@@ -1,8 +1,8 @@
 import React from 'react';
-import { PCCS_DATA } from '../data/pccsData';
+import { PCCS_DATA, ToneKey } from '../data/pccsData';
 
-const ReferencePanel = () => {
-  const tones = Object.entries(PCCS_DATA.tones);
+const ReferencePanel: React.FC = () => {
+  const tones = Object.entries(PCCS_DATA.tones) as [ToneKey, typeof PCCS_DATA.tones[ToneKey]][];
 
   return (
     <aside className="reference-panel">
