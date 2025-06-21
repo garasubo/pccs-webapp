@@ -1,6 +1,8 @@
-# PCCS学習ウェブアプリ
+# PCCS学習ウェブアプリ (React版)
 
 PCCS（Practical Color Coordinate System）を学習するためのインタラクティブなウェブアプリケーションです。色を見て、そのトーンと色相番号を答える練習ができます。
+
+このアプリケーションは、元のバニラJavaScript版をVite + Reactで書き直したものです。
 
 ## 🎨 特徴
 
@@ -39,23 +41,19 @@ PCCS（Practical Color Coordinate System）を学習するためのインタラ�
 - `Enter`: 回答を送信
 - `Space`: 次の問題に進む
 
-## 📁 ファイル構成
-
-```
-pccs-webapp/
-├── index.html      # メインHTML構造
-├── style.css       # スタイリングとレスポンシブデザイン
-├── pccs-data.js    # PCCS色彩データベース
-├── script.js       # アプリケーションロジック
-└── README.md       # このファイル
-```
-
 ## 🛠 技術仕様
 
 ### フロントエンド
-- **HTML5**: セマンティックなマークアップ
+- **React 19**: モダンなReactフック使用
+- **Vite**: 高速な開発サーバーとビルドツール
 - **CSS3**: Flexbox/Grid レイアウト、レスポンシブデザイン
-- **JavaScript (ES6+)**: クラスベースの構造化プログラミング
+- **JavaScript (ES6+)**: モジュール化されたコンポーネント構造
+
+### アーキテクチャ
+- **コンポーネントベース**: 再利用可能なReactコンポーネント
+- **カスタムフック**: スコア管理用のuseScore
+- **状態管理**: React標準のuseStateとuseEffect
+- **データ分離**: PCCS色彩データを独立したモジュールとして管理
 
 ### 色彩データ
 - **正確なRGB値**によるPCCS色再現
@@ -63,10 +61,63 @@ pccs-webapp/
 - **日本語での色相名**対応
 
 ### ブラウザ互換性
-- Chrome 60+
-- Firefox 55+
-- Safari 12+
-- Edge 79+
+- Chrome 90+
+- Firefox 88+
+- Safari 14+
+- Edge 90+
+
+## 📁 プロジェクト構成
+
+```
+pccs-react-app/
+├── public/
+│   └── vite.svg
+├── src/
+│   ├── components/          # Reactコンポーネント
+│   │   ├── Header.jsx
+│   │   ├── ColorDisplay.jsx
+│   │   ├── ToneSelection.jsx
+│   │   ├── HueSelection.jsx
+│   │   ├── ActionButtons.jsx
+│   │   ├── Feedback.jsx
+│   │   └── ReferencePanel.jsx
+│   ├── data/               # データ層
+│   │   └── pccsData.js
+│   ├── hooks/              # カスタムフック
+│   │   └── useScore.js
+│   ├── App.jsx             # メインアプリケーション
+│   ├── App.css             # スタイリング
+│   └── main.jsx            # エントリーポイント
+├── index.html              # HTMLテンプレート
+├── package.json            # 依存関係とスクリプト
+└── README.md               # このファイル
+```
+
+## 🔧 開発・セットアップ
+
+### 前提条件
+- Node.js 16.0以上
+- npm または yarn
+
+### インストールと起動
+```bash
+# 依存関係のインストール
+npm install
+
+# 開発サーバーの起動
+npm run dev
+
+# ブラウザで http://localhost:5173 を開く
+```
+
+### ビルドとデプロイ
+```bash
+# プロダクションビルド
+npm run build
+
+# ビルド結果のプレビュー
+npm run preview
+```
 
 ## 📚 PCCS（Practical Color Coordinate System）について
 
@@ -103,25 +154,20 @@ PCCSは日本色研事業株式会社が開発した色彩体系で、以下の�
 - 色相番号は色相環の位置を意識
 - グレイッシュ系トーンの違いに注意
 
-## 🔧 開発・カスタマイズ
+## 🔄 元のバニラJS版との違い
 
-### ローカル開発
-```bash
-# ファイルをダウンロード
-git clone [repository-url]
-cd pccs-webapp
+### 改善点
+- **コンポーネント化**: 再利用可能で保守しやすいコード構造
+- **型安全性**: PropTypesやJSDocによる型ヒント
+- **状態管理**: Reactの宣言的な状態管理
+- **開発体験**: Viteによる高速な開発サーバー
+- **モジュール化**: ES6モジュールによる依存関係の明確化
 
-# ブラウザで開く
-open index.html
-# または
-python -m http.server 8000  # Python 3
-python -m SimpleHTTPServer 8000  # Python 2
-```
-
-### カスタマイズポイント
-- `pccs-data.js`: 色データの調整
-- `style.css`: デザインのカスタマイズ
-- `script.js`: 機能の追加・修正
+### 機能的な互換性
+- すべての元の機能を完全に再現
+- 同じPCCS色彩データを使用
+- 同じキーボードショートカット
+- 同じローカルストレージによるスコア保存
 
 ## 📄 ライセンス
 
@@ -135,13 +181,6 @@ python -m SimpleHTTPServer 8000  # Python 2
 2. Pull Request の送信
 3. 機能改善の提案
 
-## 📞 サポート
-
-質問や問題がある場合は、以下の方法でお問い合わせください：
-
-- GitHub Issues
-- プロジェクトの Discussion
-
 ---
 
-**PCCS学習ウェブアプリ**で効果的な色彩学習を始めましょう！🎨
+**PCCS学習ウェブアプリ (React版)**で効果的な色彩学習を始めましょう！🎨

@@ -54,7 +54,11 @@ function App() {
 
     updateScore(isCorrect);
     setFeedback({
-      type: isCorrect ? 'correct' : 'incorrect'
+      type: isCorrect ? 'correct' : 'incorrect',
+      userSelection: {
+        tone: selectedTone,
+        hue: selectedHue
+      }
     });
   };
 
