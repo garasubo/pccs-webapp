@@ -95,7 +95,7 @@ pccs-react-app/
 ## 🔧 開発・セットアップ
 
 ### 前提条件
-- Node.js 16.0以上
+- Node.js 22.0以上
 - npm または yarn
 
 ### インストールと起動
