@@ -2,7 +2,6 @@
 
 PCCS（Practical Color Coordinate System）を学習するためのインタラクティブなウェブアプリケーションです。色を見て、そのトーンと色相番号を答える練習ができます。
 
-このアプリケーションは、元のバニラJavaScript版をVite + Reactで書き直したものです。
 
 ## 🎨 特徴
 
