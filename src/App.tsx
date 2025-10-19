@@ -10,9 +10,11 @@ import Feedback from './components/Feedback';
 import ReferencePanel from './components/ReferencePanel';
 import ColorCircle from './components/ColorCircle';
 import ColorRelationship from './components/ColorRelationship';
+import JisColorQuiz from './components/JisColorQuiz';
+import JisColorList from './components/JisColorList';
 import './App.css';
 
-export type ViewType = 'game' | 'circle' | 'relationship';
+export type ViewType = 'game' | 'circle' | 'relationship' | 'jis' | 'jisList';
 
 export interface FeedbackData {
   type: 'correct' | 'incorrect' | 'hint';
@@ -132,6 +134,38 @@ function App(): JSX.Element {
     );
   }
 
+  if (currentView === 'jis') {
+    return (
+      <div className="container">
+        <div className="navigation">
+          <button onClick={() => handleViewChange('game')} className="nav-button">
+            ← Back to Game
+          </button>
+          <button onClick={() => handleViewChange('jisList')} className="nav-button">
+            JIS慣用色名一覧
+          </button>
+        </div>
+        <JisColorQuiz />
+      </div>
+    );
+  }
+
+  if (currentView === 'jisList') {
+    return (
+      <div className="container">
+        <div className="navigation">
+          <button onClick={() => handleViewChange('game')} className="nav-button">
+            ← Back to Game
+          </button>
+          <button onClick={() => handleViewChange('jis')} className="nav-button">
+            JIS慣用色名クイズ
+          </button>
+        </div>
+        <JisColorList />
+      </div>
+    );
+  }
+
   return (
     <div className="container">
       <Header score={score} accuracy={getAccuracy()} />
@@ -142,6 +176,12 @@ function App(): JSX.Element {
         </button>
         <button onClick={() => handleViewChange('relationship')} className="nav-button">
           Color Relationship Game
+        </button>
+        <button onClick={() => handleViewChange('jis')} className="nav-button">
+          JIS慣用色名クイズ
+        </button>
+        <button onClick={() => handleViewChange('jisList')} className="nav-button">
+          JIS慣用色名一覧
         </button>
       </div>
       
